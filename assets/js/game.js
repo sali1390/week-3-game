@@ -5,20 +5,11 @@ window.onload = function () {
 	var guessesLeft;
 
 	function pickWord() {
-		var randomWord = ['school', 'math', 'chalk', 'science', 'lunch', 'history', 'bus'];
+		var randomWord = ['school', 'math', 'chalk', 'science', 'lunch', 'history', 'bus', 'alphabet', 'book', 'library', 'calculator', 'ruler', 'board', 'desk', 'backpack', 'pencil', 'pen'];
 		var compPick = randomWord[Math.floor(Math.random() * randomWord.length)];
 
 		return compPick;
 	};
-
-	// function displayDashes(word) {
-	// 	var display = "";
-	// 	for (var i = 0; i < word.length; i++)
-	// 		{
-	// 			display = display + "-";
-	// 		}
-	// 		return display;
-	// 
 
 	function displayDashes (word , guesses) {
 		var display = "" ;
@@ -40,28 +31,6 @@ window.onload = function () {
 		return false ;
 	}
 
-	// function isLetterInWord(word, letter) {
-	// 	if (word.search(letter)!= -1) {
-	// 		var index = word.search(letter);
-	// 		var newDisplay = display.substr(0, index) + letter + display.substr(index + 1);
-	// 		guessesLeft--;
-	// 	}
-	// 	else {
-	// 		newDisplay = display;
-	// 		guessesLeft--;
-	// 		console.log(guessesLeft);
-	// 	}
-	// 	return newDisplay;
-	// }
-
-	function resetGame() {
-		userGuesses = [];
-		guessesLeft = 13;
-		var word = pickWord();
-		var display = displayDashes(word, userGuesses);
-		document.getElementById("dashes").innerHTML = display;
-	}
-
 	wins = 0;
 	userGuesses = [];
 	guessesLeft = 13;	
@@ -71,21 +40,33 @@ window.onload = function () {
 	
 	console.log(word);
 
+	function resetGame() {
+		userGuesses = [];
+		guessesLeft = 13;
+		word = pickWord();
+		display = displayDashes(word, userGuesses);
+		document.getElementById("dashes").innerHTML = display;
+		document.getElementById("guessesLeft").innerHTML = guessesLeft;
+		document.getElementById("userGuesses").innerHTML = userGuesses + " ";
+	}
+
 	document.onkeydown = function (event) {
 		document.getElementById("wins").innerHTML = wins;
 		var userInput = String.fromCharCode(event.keyCode).toLowerCase();
 		userGuesses.push(userInput);
-		// display = isLetterInWord(word, userInput);
-		document.getElementById("dashes").innerHTML = displayDashes(word, userGuesses);
+		display = displayDashes(word, userGuesses);
+		document.getElementById("dashes").innerHTML = display;
 		document.getElementById("guessesLeft").innerHTML = guessesLeft;
 		document.getElementById("userGuesses").innerHTML = userGuesses + " ";
 		if (display == word) {
-			playAgain = alert("You Win! Would you like to play again?");
+			wins++;
+
+			playAgain = confirm("You Win! Would you like to play again?");
 			if (playAgain == true) {
 				resetGame();
 			}
 		} else if (guessesLeft == 0) {
-			playAgain = alert("You Lose. Would you like to play again?");
+			playAgain = confirm("You Lose. Would you like to play again?");
 			if (playAgain == true) {
 				resetGame();
 			}
