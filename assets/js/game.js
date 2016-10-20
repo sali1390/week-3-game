@@ -1,7 +1,7 @@
 window.onload = function () {
 
 	var wins;
-	var userGuesses = [];
+	var userGuesses = [ ];
 	var guessesLeft;
 
 	function pickWord() {
@@ -22,9 +22,16 @@ window.onload = function () {
 
 	function isLetterInWord(word, letter) {
 		if (word.search(letter)!= -1) {
-			return true;
+			var index = word.search(letter);
+			var newDisplay = display.substr(0, index) + letter + display.substr(index + 1);
 		}
-		return false;
+		else {
+			newDisplay = display;
+			console.log("Display: " + display);
+			guessesLeft--;
+			console.log(guessesLeft);
+		}
+		return newDisplay;
 	}
 
 	wins = 0;
@@ -41,10 +48,9 @@ window.onload = function () {
 
 	document.onkeydown = function (event) {
 		var userInput = String.fromCharCode(event.keyCode).toLowerCase();
-		if (isLetterInWord(word, userInput) == true) {
-
-
-		}
-
+		userGuesses.push(userInput);
+		display = isLetterInWord(word, userInput);
+		document.getElementById("userGuesses").innerHTML = userGuesses + " ";
+		
 	};
 }
