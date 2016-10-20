@@ -1,7 +1,7 @@
 window.onload = function () {
 
 	var wins;
-	var userGuesses = [];
+	var userGuesses;
 	var guessesLeft;
 
 	function pickWord() {
@@ -14,22 +14,22 @@ window.onload = function () {
 	function displayDashes (word , guesses) {
 		var display = "" ;
 		for ( var i = 0 ; i < word. length ; i++) {
-			if ( inArray (word[i] , guesses))
-			display = display + word[i] ;
+			if (inArray (word[i] , guesses))
+			display = display + word[i];
 			else
-			display = display + "-" ;
+			display = display + "-";
 			}
 		guessesLeft--;
 		return display ;
-	}
+	};
 
 	function inArray (myElement , myArray) {
-		for ( var i = 0 ; i < myArray. length ; i++) {
+		for (var i = 0 ; i < myArray. length ; i++) {
 			if (myArray[i] == myElement)
-			return true
+			return true;
 			}
-		return false ;
-	}
+		return false;
+	};
 
 	wins = 0;
 	userGuesses = [];
@@ -48,7 +48,7 @@ window.onload = function () {
 		document.getElementById("dashes").innerHTML = display;
 		document.getElementById("guessesLeft").innerHTML = guessesLeft;
 		document.getElementById("userGuesses").innerHTML = userGuesses + " ";
-	}
+	};
 
 	document.onkeydown = function (event) {
 		document.getElementById("wins").innerHTML = wins;
@@ -71,5 +71,5 @@ window.onload = function () {
 				resetGame();
 			}
 		}
-	}
+	};
 }
